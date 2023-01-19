@@ -5,8 +5,8 @@ import re
 
 
 
-# new_dict = {}
-# for i in range(15, 22):
+
+# for i in range(7, 29):
 #     with pdfplumber.open('pasport_spr_oazis__endj8Y.pdf') as pdf:
 #         first_page = pdf.pages[i]
 #         data = first_page.extract_text()
@@ -17,20 +17,38 @@ import re
 
 with open('data.txt', 'r', encoding='utf-8') as file:
     data = file.read()
-new_list = []
-type = re.findall(r'(OC-\d*-\d-\d*).*(\d{2},\d{1})\s(\d{1},\d{3})', data)
-for item in type:
-    new_list.append(item[0])
-    new_list.append(item[-1])
+# print(len(data))
+
+
+type_ = re.findall(r'(OC-\d{2}-\d{1}-\d{2})\s\d*\s*\d*\s*\d*\s*\d*\s*\d*\s*\D*\d*\S*\s*\d*,\d*\s*(\d{1},\d{3})', data)
+# print(type_)
+
+f = open('data1.txt', 'w')
+for item in type_:
+    s1 = str(item[0])
+    s2 = str(item[-1])
+    f.write(s1 + ' ' + s2 + '\n')
+
+
+
+
+# print(type_)
+# new_dict = {}
+# for item in type_:
+#     with open('data1.txt', 'a', encoding='utf-8') as file:
+#         file.write(item[0], item[-1])
+
+
+
     
-    with open('data1.txt', 'a', encoding='utf-8') as file:
-        file.write(new_list)
+    # with open('data1.txt', 'a', encoding='utf-8') as file:
+    #     file.write(new_list)
 
 
 
 
 
-# (OC-\d*-\d-\d*).*(\d{2},\d{1})\s(\d{1},\d{3})
+
 
 
 
