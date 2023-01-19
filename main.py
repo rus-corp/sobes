@@ -1,63 +1,36 @@
+import pdfplumber
+from pdfrw import PdfReader
+import json
+import re
 
 
-class Stack:
-    def __init__(self):
-        self.stack = []
 
-        
+# new_dict = {}
+# for i in range(15, 22):
+#     with pdfplumber.open('pasport_spr_oazis__endj8Y.pdf') as pdf:
+#         first_page = pdf.pages[i]
+#         data = first_page.extract_text()
+#         with open('data.txt', 'a', encoding='utf-8') as file:
+#             file.write(data)
+
+
+
+with open('data.txt', 'r', encoding='utf-8') as file:
+    data = file.read()
+new_list = []
+type = re.findall(r'(OC-\d*-\d-\d*).*(\d{2},\d{1})\s(\d{1},\d{3})', data)
+for item in type:
+    new_list.append(item[0])
+    new_list.append(item[-1])
     
-    def is_empty(self):
-        print(self.stack)
-        if self.stack:
-            return True
-        else:
-            return False
-
-    def stack_push(self, x):
-        return self.stack.append(x)
-
-    def stack_pop(self):
-        return self.stack.pop()
-
-    def stack_peek(self):
-        return self.stack[-1]
-
-    def stack_len(self):
-        return len(self.stack)
-
-
-def balance(x):
-    s = Stack()
-    for i in x:
-        if i in '({[':
-            s.stack_push(i)
-        if i in ')}]':
-            if not s.is_empty():
-                return False
-            else:
-                t = s.stack_peek()
-                if t == '{' or t == '[' or t == '(':
-                    s.stack_pop()
-                else:
-                    return False
-    return True
-
-            
-            
-            
+    with open('data1.txt', 'a', encoding='utf-8') as file:
+        file.write(new_list)
 
 
 
 
-            
 
-if __name__ == '__main__':
-    lists = ['([{}])', '[([])((([[[]]])))]{()}', '{{[()]}}', '}{}', '{{[(])]}}', '[[{())}]']
-    for x in lists:
-        print(balance(x))
-
-
-
+# (OC-\d*-\d-\d*).*(\d{2},\d{1})\s(\d{1},\d{3})
 
 
 
